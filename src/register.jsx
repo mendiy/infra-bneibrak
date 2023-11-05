@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,20 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
+import axios from 'axios';
 
 const theme = createTheme({
   palette: {
@@ -34,17 +21,26 @@ const theme = createTheme({
     },
     background: {default: '#0A0A1B'},
   }
-});;
+});
 
 export default function SignUp() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+   
+    axios.post('http://localhost:5000/register', data);
+ 
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,7 +54,7 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main}}>
+          <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" color='#F6C927'>
@@ -73,11 +69,12 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   inputProps={{
-                      placeholder: "First Name",
-                      style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
-                    }}
+                    placeholder: "First Name",
+                    style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
+                  }}
                   autoFocus
                 />
               </Grid>
@@ -87,13 +84,13 @@ export default function SignUp() {
                   fullWidth
                   id="lastName"
                   name="lastName"
-        
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   autoComplete="family-name"
                   inputProps={{
-                      placeholder: "Last Name",
-                      style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
-                    }}
-                  
+                    placeholder: "Last Name",
+                    style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -103,10 +100,12 @@ export default function SignUp() {
                   id="email"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   inputProps={{
-                      placeholder: "Email Address",
-                      style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
-                    }}
+                    placeholder: "Email Address",
+                    style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -114,25 +113,25 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="password"
-                  
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   inputProps={{
-                      placeholder: "Password",
-                      style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
-                    }}
+                    placeholder: "Password",
+                    style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" label="Primary" color='primary'/>}
+                  control={<Checkbox value="allowExtraEmails" label="Primary" color='primary' />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
             <Button
-              
               type="submit"
               fullWidth
               variant="contained"
@@ -149,7 +148,6 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
