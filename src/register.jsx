@@ -14,6 +14,19 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -22,6 +35,7 @@ const theme = createTheme({
     background: {default: '#0A0A1B'},
   }
 });
+
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -148,7 +162,8 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-      </Container>
-    </ThemeProvider>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
+  </ThemeProvider>
   );
 }
