@@ -42,8 +42,10 @@ export default function SignUp() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState('')
+  const [success, setSuccess] = useState('')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
       firstName: firstName,
@@ -52,8 +54,23 @@ export default function SignUp() {
       password: password,
     };
    
-    axios.post('http://localhost:5000/register', data);
- 
+    try {
+      const response = await axios.post('http://localhost:5000/register', data);
+      console.log(response.data);
+      setSuccess(response.data)
+      setErrors('')
+     
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        
+        setErrors(error.response.data.errors.join(', '));
+        setSuccess('');
+        console.log(errors)
+      } else {
+        console.error('Undetected error', error.message);
+      }
+    }
+   
   }
 
   return (
@@ -87,7 +104,7 @@ export default function SignUp() {
                   onChange={(e) => setFirstName(e.target.value)}
                   inputProps={{
                     placeholder: "First Name",
-                    style: { color: '#F6C927', placeholder: 'pramery', background: '#21213E'} 
+                    style: { color: '#F6C927', placeholder: 'primary', background: '#21213E'} 
                   }}
                   autoFocus
                 />
@@ -157,9 +174,15 @@ export default function SignUp() {
               <Grid item>
                 <Link href="/" variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </Link>  
               </Grid>
             </Grid>
+            <Typography component="p" variant="p" color="error">
+                  {errors}
+                </Typography>
+                <Typography component="p" variant="p" color="green">
+                  {success}
+                </Typography>
           </Box>
         </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
