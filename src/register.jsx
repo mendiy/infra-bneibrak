@@ -44,6 +44,7 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState('')
   const [success, setSuccess] = useState('')
+  const [token, setToken] = useState('')
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -56,16 +57,17 @@ export default function SignUp() {
    
     try {
       const response = await axios.post('http://localhost:5000/register', data);
-      console.log(response.data);
-      setSuccess(response.data)
+      const receivedToken = response.data.token;
+      setToken(receivedToken); 
+      console.log(token)
+      setSuccess(response.data.msg)
       setErrors('')
      
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
         
-        setErrors(error.response.data.errors.join(', '));
+        setErrors(error.response.data.errors.join(', ')); 
         setSuccess('');
-        console.log(errors)
       } else {
         console.error('Undetected error', error.message);
       }

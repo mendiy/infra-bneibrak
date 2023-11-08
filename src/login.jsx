@@ -1,4 +1,4 @@
-import * as React from 'react';
+import react, {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -27,8 +27,6 @@ function Copyright(props) {
   );
 }
 
-
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -38,10 +36,32 @@ const theme = createTheme({
   }
 });;
 
+
 export default function SignIn() {
-  const handleSubmit = (event) => {
+
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+const [errors, setErrors] = useState('');
+const [success, setSuccess] = useState('')
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const data = {
+      email: email,
+      password: password,
+    }
+
+    try {
+    const response = await axios.post('http://localhost:5000/login',data)
+    console.log(response.data)
+    setErrors('')
+    setSuccess(response.data)
     
+    }catch(error){
+      
+        setErrors(error.response.data.errors); 
+        console.log(error.response.data.errors)
+      }    
   };
 
   return (
@@ -71,9 +91,9 @@ export default function SignIn() {
               fullWidth
               id="email"
               name="email"
-              
               autoComplete="email"
-              
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               inputProps={{
               placeholder: "Email Address",
               style: { color: '#F6C927', placeholder: '#FF5733', background: '#21213E'} 
@@ -87,7 +107,8 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               id="password"
               autoComplete="current-password"
@@ -122,6 +143,12 @@ export default function SignIn() {
                 </Link>
               </Grid>
             </Grid>
+            <Typography component="p" variant="p" color="error">
+                  {errors}
+              </Typography>
+              <Typography component="p" variant="p" color="green">
+                  {success}
+                </Typography>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
