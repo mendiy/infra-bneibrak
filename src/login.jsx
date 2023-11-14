@@ -27,16 +27,6 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#F6C927'
-    },
-    background: {default: '#0A0A1B'}
-  }
-});;
-
-
 export default function SignIn() {
 
 const [email, setEmail] = useState('');
