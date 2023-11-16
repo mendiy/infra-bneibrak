@@ -4,7 +4,9 @@ import SignUp from "./register";
 import Homepage from "./Homepage";
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+=======
 // import tokenIsCorrect from './token.js'
+
 
 const theme = createTheme({
   palette: {
@@ -18,6 +20,20 @@ const theme = createTheme({
 
 
 export default function App() {
+
+    return (
+      <ThemeProvider theme={theme}>
+      {/* <Router>
+          <Routes>
+          <Route exact path="/register"
+            element ={<SignUp />} />
+          <Route path="/" element={<SignIn />} /> 
+          </Routes>
+      </Router> */}
+      </ThemeProvider>
+    )
+  }
+  
   const isHaveValidToken = false;
   
 
@@ -38,6 +54,7 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
 
 
 

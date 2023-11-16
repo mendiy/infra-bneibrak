@@ -17,52 +17,38 @@ const Sidebar = () => {
   const handleButtonClick = (button) => {
     setSelectedButton(button);
   };
-
-  
-  const buttonStyle = {
-    marginTop: '10.506vh',
-    height: '4.989vh',
-    width: '100%',
-    textAlign: 'left',
-    backgroundColor: '#21213E',
-    color: 'white',
-    paddingLeft: '6px',
-  };
-
-
   return (
     <Drawer 
     variant="permanent" 
     anchor="left"
     PaperProps={{
     sx: {
-      marginTop: '8.506vh',
-      display: "flex", // Add this line
+      display: "flex", 
       flexDirection: "column",
-      width: '15%',
-      height: '89vh',
-      backgroundColor: '#21213E',
+      height: '100vh',
+      width: '17%',
+      minWidth: '180px',
+      backgroundColor: '#121231',
       color: "white",
       flexGrow: "inherit",
-      overflow: 'hidden', // Add this line
-
     }
   }}
     >
-
-    <div style={{ flex: 1 }}>
+    
+    <div style={{ flex: 1}}>
     {/* First flex container with five buttons */}
+
     <List>
-      
+    <div style={{height: '8vh'}}> </div>      
     <ListItemSpaciel
         text="Dashboard"
-        bgcolor={selectedButton === 1 ? '#F6C927' : '#21213E'}
+        bgcolor={selectedButton === 1 ? '#F6C927' : '#121231'}
         svg={<SpeedOutlinedIcon sx={{color: 'white', width: '20px', height: '18px'}}></SpeedOutlinedIcon>}
         onClick={() => handleButtonClick(1)}
          />
          <ListItemSpaciel
          text="Projects"
-         bgcolor={selectedButton === 2 ? '#F6C927' : '#21213E'}
+         bgcolor={selectedButton === 2 ? '#F6C927' : '#121231'}
          svg={
           <FeedOutlinedIcon sx={{color: 'white', width: '20px', height: '18px'}}></FeedOutlinedIcon>
           }
@@ -70,19 +56,19 @@ const Sidebar = () => {
           />
           <ListItemSpaciel
           text='Board'
-          bgcolor={selectedButton === 3 ? '#F6C927' : '#21213E'}
+          bgcolor={selectedButton === 3 ? '#F6C927' : '#121231'}
           svg={<DvrOutlinedIcon sx={{color: 'white', width: '20px', height: '18px'}} />}
         onClick={() => handleButtonClick(3)}
            />
       <ListItemSpaciel 
       text="Add User"
-      bgcolor={selectedButton === 4 ? '#F6C927' : '#21213E'}
+      bgcolor={selectedButton === 4 ? '#F6C927' : '#121231'}
       svg={<PermIdentityOutlinedIcon sx={{color: 'white', width: '20px', height: '18px'}}></PermIdentityOutlinedIcon>}
       onClick={() => handleButtonClick(4)}
        />
        <ListItemSpaciel 
        text="Messages"
-       bgcolor={selectedButton === 5 ? '#F6C927' : '#21213E'}
+       bgcolor={selectedButton === 5 ? '#F6C927' : '#121231'}
        svg={<MessageOutlinedIcon sx={{color: 'white', width: '20px', height: '18px'}}></MessageOutlinedIcon>}
        onClick={() => handleButtonClick(5)}
        />    

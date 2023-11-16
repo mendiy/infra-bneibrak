@@ -1,33 +1,39 @@
 import { IconButton, InputBase, Paper } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import react from "react";
 
-export default function SearchBar(){
-    return (
-    <div style={{ flexGrow: 1, 
-        position: 'fixed',
-      top: '37px',
-      right: '24.33%',
-      left: '52.11%',
-      width: '23.408%',
-      height: '53px',
-      display: 'flex',
-      alignItems: 'center',
-      padding: '0 16px',
-      color: '#121231',
-      borderRadius: '10px',
-    
-     }}>
-    <Paper style={{ backgroundColor: '#121231', marginLeft: '0.898%' }}>
-        <InputBase 
-        placeholder="Search"
-          inputProps={{ style: { color: '#fff'} }}
-           />
-           <IconButton>
-        <SearchIcon style={{color: "#fff", Width: '18px', Height: '18px', Top: '54px', marginRight: '1.993%' }} />
+const SearchBar = () => {
+  return (
+    <div
+      style={{
+        position: "sticky",
+        marginTop: "37px",
+        maxWidth: "100%",
+        height: "53px",
+        color: "#121231",
+        borderRadius: "10px",
+      }}
+    >
+      <Paper
+        style={{
+          backgroundColor: "#121231",
+          marginLeft: "0.898%",
+          position: "fixed",
+          width: "23.42%",
+          flexShrink: "0",
+        }}
+      >
+        <IconButton>
+          <SearchIcon style={{ color: "#fff" }} />
         </IconButton>
-
-    </Paper>
+        <InputBase
+          placeholder="Search"
+          inputProps={{
+            style: { color: "#fff", minWidth: "100px", maxWidth: "150px" },
+          }}
+        />
+      </Paper>
     </div>
-    )
-}
+  );
+};
+export default SearchBar;
