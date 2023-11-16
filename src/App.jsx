@@ -1,9 +1,12 @@
 import React from "react";
 import SignIn from "./login";
 import SignUp from "./register";
+import Homepage from "./Homepage";
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import HomePage from "./HomePage";
+=======
+// import tokenIsCorrect from './token.js'
+
 
 const theme = createTheme({
   palette: {
@@ -15,10 +18,11 @@ const theme = createTheme({
 });;
 
 
+
 export default function App() {
+
     return (
       <ThemeProvider theme={theme}>
-        <HomePage />
       {/* <Router>
           <Routes>
           <Route exact path="/register"
@@ -29,6 +33,28 @@ export default function App() {
       </ThemeProvider>
     )
   }
-    
+  
+  const isHaveValidToken = false;
+  
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Router> 
+        <Routes>
+            {isHaveValidToken ? (
+      <Route path="/homepage" element={<Homepage />} />
+        ) : (
+          <>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/register" element={<SignUp />} /> 
+          </>
+    )}
+        </Routes>
+      </Router>
+    </ThemeProvider>
+  );
+}
+
+
 
 
