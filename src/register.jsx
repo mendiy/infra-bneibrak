@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createHashHistory } from 'history';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,7 +12,6 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 
 function Copyright(props) {
@@ -29,14 +29,14 @@ function Copyright(props) {
 
 
 export default function SignUp() {
+  const history = createHashHistory();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState('')
   const [success, setSuccess] = useState('')
-  const [token, setToken] = useState('')
-
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
@@ -48,11 +48,9 @@ export default function SignUp() {
    
     try {
       const response = await axios.post('http://localhost:5000/register', data);
-      const receivedToken = response.data.token;
-      setToken(receivedToken); 
-      console.log(token)
-      setSuccess(response.data.msg)
+      setSuccess(response.data.message)
       setErrors('')
+      history.push('/login');
      
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
@@ -67,7 +65,6 @@ export default function SignUp() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -78,7 +75,7 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
+          <Avatar sx={{ m: 1, bgcolor:'#F6C927' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" color='#F6C927'>
@@ -180,6 +177,5 @@ export default function SignUp() {
         </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
-  </ThemeProvider>
   );
 }

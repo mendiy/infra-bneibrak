@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 
 function Copyright(props) {
@@ -44,18 +43,21 @@ const [success, setSuccess] = useState('')
     try {
     const response = await axios.post('http://localhost:5000/login',data)
     console.log(response.data)
-    setErrors('')
-    setSuccess(response.data)
+    // const receivedToken = response.data.token;
+    // localStorage.setItem('authToken', receivedToken);
+    // console.log(token)
     
-    }catch(error){
-      
-        setErrors(error.response.data.errors); 
-        console.log(error.response.data.errors)
-      }    
+    setErrors('')
+    setSuccess(response.data.message)
+    
+  } catch (error) {
+      setErrors(error.response.data.message); 
+      setSuccess('');
+    
+  }  
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -74,7 +76,6 @@ const [success, setSuccess] = useState('')
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} color='#F6C927'>
             <TextField
-
               margin="normal"
               color="primary"
               required
@@ -116,7 +117,6 @@ const [success, setSuccess] = useState('')
               type="submit"
               fullWidth
               variant="contained"
-              
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
@@ -143,6 +143,5 @@ const [success, setSuccess] = useState('')
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
   );
 }
