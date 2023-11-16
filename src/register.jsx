@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { createHashHistory } from 'history';
+// import { createHashHistory } from 'history';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,7 +30,9 @@ function Copyright(props) {
 
 
 export default function SignUp() {
-  const history = createHashHistory();
+
+  const navigateTo = useNavigate();
+  // const history = createHashHistory();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -50,7 +53,10 @@ export default function SignUp() {
       const response = await axios.post('http://localhost:5000/register', data);
       setSuccess(response.data.message)
       setErrors('')
-      history.push('/login');
+      setTimeout(() => {
+        navigateTo('/');
+      }, 1000);
+;
      
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
