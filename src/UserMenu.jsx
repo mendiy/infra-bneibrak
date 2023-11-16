@@ -15,10 +15,11 @@ import '@fontsource/roboto/700.css';
 const UserMenu = () => {
   return (
     <div style={{
-      position: 'fixed',
-      top: '26px',
-      right: '56px',
-      width: '18.9%',
+      marginTop: '26px',
+      maxWidth: '19%%',
+      minWidth: '200px',
+      marginRight: '2.7%',
+      marginLeft: '2.7%',
       height: '65px',
       display: 'flex',
       justifyContent: 'space-between',
@@ -56,7 +57,6 @@ const UserMenu = () => {
           >Title</div>
         </div>
       </div>
-      {/* Bell icon with notifications count */}
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <IconButton color="inherit" style={{width: '45px', height: '45px', background:'#21213E', margin: '10px'}} >
         <Badge badgeContent={2} color="error">
@@ -64,7 +64,7 @@ const UserMenu = () => {
           </Badge>
         </IconButton>
         {/* 'More' icon for additional settings */}
-        <IconButton color="inherit" style={{width: '45px', height: '45px', background:'#21213E'}}>
+        <IconButton color="inherit" style={{width: '45px', height: '45px', background:'#21213E', position: 'sticky'}}>
           <MoreVertIcon />
         </IconButton>
       </div>
