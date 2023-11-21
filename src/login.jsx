@@ -1,4 +1,5 @@
 import react, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,33 +29,37 @@ function Copyright(props) {
 
 export default function SignIn() {
 
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [errors, setErrors] = useState('');
-const [success, setSuccess] = useState('')
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = {
-      email: email,
-      password: password,
-    }
+  const navigateTo = useNavigate()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState('');
+  const [success, setSuccess] = useState('')
 
-    try {
-    const response = await axios.post('http://localhost:5000/login',data)
-    console.log(response.data)
-    // const receivedToken = response.data.token;
-    // localStorage.setItem('authToken', receivedToken);
-    // console.log(token)
-    
-    setErrors('')
-    setSuccess(response.data.message)
-    
-  } catch (error) {
-      setErrors(error.response.data.message); 
-      setSuccess('');
-    
-  }  
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const data = {
+        email: email,
+        password: password,
+      }
+
+      try {
+      const response = await axios.post(`http://localhost:5000/api/users/login`,data)
+      // console.log(response.data)
+      const receivedToken = response.data.token;
+      localStorage.setItem('authToken', receivedToken);
+      const token = localStorage.getItem('authToken');
+      console.log(token)
+      
+      setErrors('')
+      setSuccess(response.data.message)
+      navigateTo('/homepage')
+      
+    } catch (error) {
+        setErrors(error.response.data.message); 
+        setSuccess('');
+      
+    }  
   };
 
   return (
