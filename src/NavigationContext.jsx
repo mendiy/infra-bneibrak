@@ -2,7 +2,8 @@ import tokenIsCorrect from './token.js';
 import { useEffect, useState } from 'react';
 import SignIn from "./login";
 import SignUp from "./register";
-import HomePage from "./HomePage.jsx";
+import HomePage from "./HomePage";
+import UserTitle from "./UserTitle";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
 const Navigation = () => {
@@ -30,6 +31,7 @@ const Navigation = () => {
         <Route path="/home" element={<HomePage />} />
       ) : (
         <>
+          <Route path="/userTitle" element={<UserTitle />} />
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
