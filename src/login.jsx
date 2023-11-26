@@ -45,15 +45,16 @@ export default function SignIn() {
 
       try {
       const response = await axios.post(`http://localhost:5000/api/users/login`,data)
-      // console.log(response.data)
       const receivedToken = response.data.token;
       localStorage.setItem('authToken', receivedToken);
-      const token = localStorage.getItem('authToken');
-      console.log(token)
-      
       setErrors('')
       setSuccess(response.data.message)
-      navigateTo('/homepage')
+      const title = response.data.title;
+      if(title){
+        navigateTo('/homepage')
+      } else{
+        navigateTo(`/userTitle`)
+      }
       
     } catch (error) {
         setErrors(error.response.data.message); 

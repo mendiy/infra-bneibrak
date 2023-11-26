@@ -1,30 +1,24 @@
 import axios from "axios";
 
+const checkToken = async () => {
+  try{
+  // localStorage.removeItem('authToken')
+  const token = localStorage.getItem('authToken')
 
-// const token = 'eyJhbGciOiJIUzI1NiJ9.aGhAampqampqampqampqampqamouY29t.UlR8638RE8BEet0A-gXX4CjFi95x4-1ENnOmvvk1L8g';
-
-const tokenIsCorrect = async () => {
+      const response = await axios.get(`http://localhost:5000/api/users/verifyToken`, {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      });
+      return response.status
+     
+    } catch (error) {
    
-    
-    try{
-      const token = localStorage.getItem('authToken');
-        console.log(token)
-        if(!token) console.log('not token')
-    //     const response = await axios.get('http://localhost:5000/validate-token', {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-
-    //   console.log(response)
-        // return true;
-        return false
-
-    }catch (error){
-        console.log(error)
-        return false;
+      console.error("Token validation failed:", error);
+      return error.response.status
     }
-}
-// tokenIsCorrect()
+  
 
-export default tokenIsCorrect;
+};
+
+export default checkToken;

@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar";
 import SearchBar from "./SearchBar";
 import UserMenu from "./UserMenu";
 import Grid from '@mui/material/Grid';
+import axios from "axios";
 
 export default function HomePage() {
   return (

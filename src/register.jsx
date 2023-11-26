@@ -52,7 +52,7 @@ export default function SignUp() {
       setSuccess(response.data.message)
       setErrors('')
       setTimeout(() => {
-        navigateTo(`/userTitle?email=${encodeURIComponent(email)}`);;
+        navigateTo('/');;
       }, 1000);
 
      

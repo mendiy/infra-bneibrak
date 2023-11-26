@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import Typography from '@mui/material/Typography';
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
@@ -39,19 +40,13 @@ const theme = createTheme({
 });
 
 export default function UserClassification() {
-  const [personTitle, setPersonTitle] = React.useState("");
-  const [errors, setErrors] = React.useState("");
-  const [success, setSuccess] = React.useState("");
-  const [token, setToken] = useState("");
-  const [emailParam, setEmailParam] = useState("");
+  const [personTitle, setPersonTitle] = useState("");
+  const [errors, setErrors] = useState("");
+  const [success, setSuccess] = useState("");
+
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const email = new URLSearchParams(location.search).get("email");
-    setEmailParam(email);
-    console.log("Email from register:", emailParam);
-  }, [location.search]);
+ 
 
   const handleChange = (event) => {
     const {
@@ -63,7 +58,6 @@ export default function UserClassification() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
-      email: emailParam,
       title: personTitle,
     };
 
@@ -72,11 +66,11 @@ export default function UserClassification() {
         "http://localhost:5000/api/users/userTitle",
         data
       );
-    //   const receivedToken = response.data.token;
-    //   setToken(receivedToken);
-    //   console.log(token);
-        setSuccess(response.data.message);
-      setErrors("");
+   
+      setSuccess(response.data.message);
+      setTimeout(() => {
+        navigate('/homepage');;
+      }, 1000);
       
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
@@ -84,10 +78,8 @@ export default function UserClassification() {
         setSuccess("");
       } else {
         console.error("Undetected error", error.message);
-      }
-      
+      }  
     }
-    navigate("/");
   };
 
   return (
@@ -150,7 +142,11 @@ export default function UserClassification() {
             Submit
           </Button>
         </div>
+        <Typography component="p" variant="p" color="green">
+        {success}
+      </Typography>
       </Box>
+   
     </div>
   );
 }
