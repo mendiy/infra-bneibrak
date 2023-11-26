@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SignIn from './login';
 import SignUp from './register';
-import HomePage from './HomePage';
+import Homepage from './HomePage';
 import UserTitle from './UserTitle';
 import CircularColor from './CircularProgress';
 import checkToken from './token';
@@ -83,7 +83,7 @@ const App = () => {
         ) : (
           <>
             <Route path="/userTitle" element={<UserTitle />} />
-            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/homepage" element={<Homepage />} />
             <Route path="/" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
           </>
