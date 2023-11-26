@@ -2,7 +2,7 @@ import react from "react";
 import Sidebar from "./Sidebar";
 import SearchBar from "./SearchBar";
 import UserMenu from "./UserMenu";
-import { Grid, styled } from "@material-ui/core";
+import Grid from '@mui/material/Grid';
 
 export default function HomePage() {
   return (
