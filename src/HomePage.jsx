@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 export default function HomePage() {
   return (
     <div>
-      <Grid container style={{ height: "97vh", background: '#21213E' }}>
+      <Grid container style={{ height: "100vh", background: '#21213E' }}>
         {/* First Row */}
         <Grid item xs={12}>
           <Grid container style={{ height: "6%" }}>
