@@ -7,7 +7,7 @@ const checkToken = async () => {
 
       const response = await axios.get(`http://localhost:5000/api/users/verifyToken`, {
         headers: {
-          authorization: 'Bearer ' + token,
+          authorization: token,
         },
       });
       return response.status
