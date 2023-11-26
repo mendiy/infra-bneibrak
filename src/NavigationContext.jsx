@@ -10,20 +10,20 @@ const Navigation = () => {
   const [isHaveValidToken, setIsHaveValidToken] = useState(false);
   const navigateTo = useNavigate();
 
-  useEffect(() => {
-    const checkToken = async () => {
-      try {
-        const isValid = await tokenIsCorrect();
-        setIsHaveValidToken(isValid);
+  // useEffect(() => {
+  //   const checkToken = async () => {
+  //     try {
+  //       const isValid = await tokenIsCorrect();
+  //       setIsHaveValidToken(isValid);
 
-        if (isValid) navigateTo('/home', { replace: true });
-      } catch (error) {
-        console.error('Error checking token:', error);
-      }
-    };
+  //       if (isValid) navigateTo('/home', { replace: true });
+  //     } catch (error) {
+  //       console.error('Error checking token:', error);
+  //     }
+  //   };
 
-    checkToken();
-  }, [navigateTo]);
+  //   checkToken();
+  // }, [navigateTo]);
 
   return (
     <Routes>
@@ -32,7 +32,7 @@ const Navigation = () => {
       ) : (
         <>
           <Route path="/userTitle" element={<UserTitle />} />
-          <Route path="/homepage" element={<HomePage />} />
+          {/* <Route path="/homepage" element={<HomePage />} /> */}
           <Route path="/" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
         </>
