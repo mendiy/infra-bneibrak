@@ -8,7 +8,7 @@ import SignUp from './register';
 import Homepage from './HomePage';
 import UserTitle from './UserTitle';
 import CircularColor from './CircularProgress';
-import checkToken from './token';
+import checkToken from './verifyToken';
 
 const theme = createTheme({
   palette: {
