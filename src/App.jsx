@@ -9,6 +9,8 @@ import Homepage from './HomePage';
 import UserTitle from './UserTitle';
 import CircularColor from './CircularProgress';
 import checkToken from './verifyToken';
+import UpdateProfile from './UpdateProfile';
+import CurrentProfile from './CurrentProfile';
 
 const theme = createTheme({
   palette: {
@@ -86,6 +88,8 @@ const App = () => {
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
+            <Route path='/currentProfile' element={<CurrentProfile />} />
+            <Route path='/updateProfile' element={<UpdateProfile />} />
           </>
         )}
       </Routes>

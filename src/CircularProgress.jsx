@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 export default function CircularColor() {
   return (
-    <Box container style={{ background: '#21213E' }}>
+    <Box style={{ background: '#21213E' }}>
       <Typography component="h1" variant="h3" color="#F6C927" sx={{ textAlign: 'center', alignItems: 'center' }}>
         loading...
       </Typography>
