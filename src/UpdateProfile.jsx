@@ -238,7 +238,7 @@ const UpdateProfile = () => {
                   setIsPasswordModified(true);
                 }}
                 inputProps={{
-                  placeholder: "Password",
+                  placeholder: "New Password",
                   style: {
                     color: "#F6C927",
                     placeholder: "pramery",
