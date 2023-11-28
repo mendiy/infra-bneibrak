@@ -100,6 +100,7 @@ const UpdateProfile = () => {
         "http://localhost:5000/api/users/profileUpdate",
         data
       );
+      setSuccess(response.data.message)
       console.log(responsePut);
 
       // Redirect to the home page after the update
