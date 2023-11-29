@@ -89,7 +89,7 @@ const UserMenu = () => {
   };
 
   const [profileData, setProfileData] = useState({});
-  const [error, setError] = useState(null);
+  const [firstLetter, setFirstLetter] = useState('U');
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -102,6 +102,7 @@ const UserMenu = () => {
 
         const { firstName, lastName, title } = response.data.result;
         setProfileData({ firstName, lastName, title });
+        setFirstLetter(firstName[0]);
       } catch (error) {
         console.error('Error fetching profile data:', error);
         setError('Error fetching profile data. Please try again later.');
@@ -114,7 +115,7 @@ const UserMenu = () => {
   return (
     <div className={classes.root}>
       <div className={classes.userInfo}>
-        <Avatar className={classes.avatar} alt={profileData.firstName} />
+        <Avatar className={classes.avatar}>{firstLetter}</Avatar>
         <div style={{ marginLeft: '12px' }}>
           <div className={`user-name ${classes.userName}`}>
             {profileData.firstName + ' ' + profileData.lastName}
