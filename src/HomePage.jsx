@@ -25,7 +25,7 @@ export default function HomePage() {
             </Grid>
 
             {/* Right Column */}
-            <Grid item xs={3}>
+            <Grid item xs={3.5}>
               <UserMenu />
             </Grid>
           </Grid>
