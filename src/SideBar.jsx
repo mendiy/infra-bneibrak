@@ -37,9 +37,9 @@ const Sidebar = () => {
     >
     <div style={{ flex: 1}}>
     {/* First flex container with five buttons */}
-    <LogOutButton />
+    {/* <LogOutButton /> */}
     <List>
-    <div style={{height: '2vh'}}> </div>      
+    <div style={{height: '8vh'}}> </div>      
     <ListItemSpaciel
         text="Dashboard"
         bgcolor={selectedButton === 1 ? '#F6C927' : '#121231'}
