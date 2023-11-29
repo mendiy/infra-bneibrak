@@ -61,17 +61,18 @@ const UpdateProfile = () => {
     fetchUserData();
   }, []); // Empty dependency array ensures this effect runs only once after initial render
 
+
   const handleSoftDelete = async () => {
     try {
       // Send a delete request to soft delete the user profile
-      await axios.put("http://localhost:5000/api/users/deleteProfile");
+      await axios.put('http://localhost:5000/api/users/deleteProfile');
       // Set isDeleted to true to prevent further data fetching
-      setIsDeleted(true);
-      localStorage.removeItem("authToken");
-      navigateTo("/");
-      console.log("User profile soft deleted");
+      localStorage.removeItem('authToken')
+      navigateTo('/');
+      // Optional: You may want to redirect or show a confirmation message
+      console.log('User profile soft deleted');
     } catch (error) {
-      console.error("Error soft deleting user profile:", error);
+      console.error('Error soft deleting user profile:', error);
       // Handle the error appropriately, e.g., display an error message
     }
   };
@@ -112,14 +113,19 @@ const UpdateProfile = () => {
 
       // Send a put request to update the user profile
       const responsePut = await axios.put(
-        "http://localhost:5000/api/users/profileUpdate",
-        data
+        "http://localhost:5000/api/users/profileUpdate", data
       );
-      setSuccess(responsePut.data.message);
+      setSuccess(responsePut.data.message)
       console.log(responsePut);
 
-      // Redirect to the home page after the update
+    // Navigate based on changes
+    if (isPasswordModified || email !== "") {
+      // Redirect to the sign-in page if email or password has changed
+      navigateTo("/");
+    } else {
+      // Otherwise, continue to the home page
       navigateTo("/homepage");
+    }
     } catch (error) {
       console.error("Error updating user profile:", error);
       console.log("Server response data:", error.response.data);
@@ -308,7 +314,7 @@ const UpdateProfile = () => {
         type="button"
         fullWidth
         variant="contained"
-        sx={{ mt: 3, mb: 2, backgroundColor: "#ff0f0f" }} // Red background for delete button
+        sx={{ mt: 3, mb: 2, backgroundColor: '#ff0f0f' }} // Red background for delete button
         onClick={handleSoftDelete}
       >
         Delete Me
