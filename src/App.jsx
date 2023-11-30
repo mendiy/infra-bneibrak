@@ -9,7 +9,7 @@ import Homepage from './HomePage';
 import UserTitle from './UserTitle';
 import CircularColor from './CircularProgress';
 import checkToken from './verifyToken';
-import RemoteApp from 'project_app/App'
+// import RemoteApp from 'project_app/App'
 // const RemoteApp = React.lazy(() => import('project_app/App'));
 import Sidebar from './Sidebar';
 
@@ -69,19 +69,6 @@ const App = () => {
     };
   }, [navigateTo]);
 
-  // const router = useMemo(() => createBrowserRouter([
-  //   {
-  //     path: "/",
-  //     element: <Homepage />,
-  //     children: [
-  //       {
-  //         path: "projects/:page",
-  //         element: <RemoteApp />,
-  //       },
-  //       // Add more routes for other pages in the remote app if needed
-  //     ],
-  //   },
-  // ]), []);
 
   return (
     <ThemeProvider theme={theme}>
