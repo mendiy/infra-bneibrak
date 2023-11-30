@@ -339,13 +339,11 @@ const UpdateProfile = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Do you sure you want to delete your profile?"}
-        </DialogTitle>
+        <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
+            Are you sure you want to delete your profile? This action cannot be
+            undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

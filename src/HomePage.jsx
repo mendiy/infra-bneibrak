@@ -2,12 +2,12 @@ import react from "react";
 import Sidebar from "./Sidebar";
 import SearchBar from "./SearchBar";
 import UserMenu from "./UserMenu";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 
 export default function HomePage() {
   return (
     <div>
-      <Grid container style={{ height: "100vh", background: '#21213E' }}>
+      <Grid container style={{ height: "100vh", background: "#21213E" }}>
         {/* First Row */}
         <Grid item xs={12}>
           <Grid container style={{ height: "6%" }}>
