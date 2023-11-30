@@ -12,6 +12,7 @@ const SearchBar = () => {
         height: "53px",
         color: "#121231",
         borderRadius: "10px",
+        zIndex: 1000, // Set a higher z-index to ensure it appears above other elements
       }}
     >
       <Paper
@@ -19,8 +20,9 @@ const SearchBar = () => {
           backgroundColor: "#121231",
           marginLeft: "0.898%",
           position: "fixed",
-          width: "23.42%",
-          flexShrink: "0",
+          width: "calc(23.42% - 2px)", // Adjusted width to consider the border
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <IconButton>
@@ -29,7 +31,11 @@ const SearchBar = () => {
         <InputBase
           placeholder="Search"
           inputProps={{
-            style: { color: "#fff", minWidth: "100px", maxWidth: "150px" },
+            style: { color: "#fff", minWidth: "60px", maxWidth: "100%" },
+          }}
+          style={{
+            flex: 1, // Allow the input to grow and take up remaining space
+            marginLeft: "8px", // Add some space between icon and input
           }}
         />
       </Paper>

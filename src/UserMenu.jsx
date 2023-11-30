@@ -1,89 +1,242 @@
-import React, { useState, useEffect } from 'react';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Badge } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React, { Fragment, useEffect, useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import {
+  Badge,
+  Divider,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Tooltip,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { makeStyles } from "@material-ui/core";
+import { Box, createTheme } from "@mui/system";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: "26px",
+    marginRight: "2.7vw",
+    marginLeft: "2.7%",
+    height: "65px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0 16px",
+    backgroundColor: "#121231",
+    color: "white",
+    borderRadius: "10px",
+    zIndex: 1000,
+    [theme.breakpoints.down("sm")]: {
+      "& .bell-icon": {
+        display: "none",
+      },
+      "& .user-name, & .user-title": {
+        display: "none",
+      },
+      justifyContent: "flex-end",
+      width: "120px",
+    },
+  },
+  userInfo: {
+    display: "flex",
+    alignItems: "center",
+  },
+  avatar: {
+    width: "49px",
+    height: "49px",
+    flexShrink: "0",
+  },
+  userName: {
+    color: "#FFF",
+    fontFamily: "Roboto",
+    fontSize: "13px",
+    fontStyle: "normal",
+    lineHeight: "normal",
+    fontWeight: "700",
+  },
+  userTitle: {
+    color: "#FFF",
+    fontFamily: "Roboto",
+    fontSize: "13px",
+    fontStyle: "normal",
+    lineHeight: "normal",
+  },
+  iconButton: {
+    width: "45px",
+    height: "45px",
+    background: "#21213E",
+    margin: "10px",
+  },
+}));
 
 const UserMenu = () => {
+  const classes = useStyles();
   const navigateTo = useNavigate();
 
-  // Add state to track whether profile data is loaded
-  const [isProfileLoaded, setIsProfileLoaded] = useState(false);
-
-  useEffect(() => {
-    // Simulate fetching profile data (replace with your actual logic)
-    const fakeFetchProfileData = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
-      setIsProfileLoaded(true);
-    };
-
-    fakeFetchProfileData();
-  }, []);
-
   const handleMoreIconClick = () => {
-    // Navigate to '/currentProfile' only if the profile data is loaded
-    if (isProfileLoaded) {
-      navigateTo('/currentProfile');
-    }
+    navigateTo("/currentProfile");
   };
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogOut = () => {
+    console.log("logout");
+    localStorage.removeItem("authToken");
+    navigateTo("/");
+  };
+
+  const [profileData, setProfileData] = useState({});
+  const [firstLetter, setFirstLetter] = useState("U");
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/users/me");
+
+        if (response.status !== 200) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const { firstName, lastName, title } = response.data.result;
+        setProfileData({ firstName, lastName, title });
+        setFirstLetter(firstName[0]);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+        setError("Error fetching profile data. Please try again later.");
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
   return (
-    <div style={{
-      marginTop: '26px',
-      maxWidth: '19%%',
-      minWidth: '200px',
-      marginRight: '2.7%',
-      marginLeft: '2.7%',
-      height: '65px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '0 16px',
-      backgroundColor: '#121231',
-      color: 'white',
-      borderRadius: '10px',
-      zIndex: 1000, // Ensure it's above other elements
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        {/* User photo */}
-        <Avatar
-          style={{width: '49px', height: '49px', flexShrink: '0'}}
-          alt="User Photo" src="/path/to/user-photo.jpg" />
-        {/* User name and title */}
-        <div style={{ marginLeft: '12px' }}>
-          <div style={{
-            color: '#FFF',
-            fontFamily: 'Roboto',
-            fontSize: '13px',
-            fontStyle: 'normal',
-            fontWeight: '700',
-            lineHeight: 'normal'}}
-          >User Name</div>
-          <div style={{
-            color: '#FFF',
-            fontFamily: 'Roboto',
-            fontSize: '10px',
-            fontStyle: 'normal',
-            fontWeight: '400',
-            lineHeight: 'normal'}}
-          >Title</div>
+    <div className={classes.root}>
+      <div className={classes.userInfo}>
+        <Avatar className={classes.avatar}>{firstLetter}</Avatar>
+        <div style={{ marginLeft: "12px" }}>
+          <div className={`user-name ${classes.userName}`}>
+            {profileData.firstName + " " + profileData.lastName}
+          </div>
+          <div className={`user-title ${classes.userTitle}`}>
+            {profileData.title}
+          </div>
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <IconButton color="inherit" style={{width: '45px', height: '45px', background:'#21213E', margin: '10px'}} >
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <IconButton
+          color="inherit"
+          className={`bell-icon ${classes.iconButton}`}
+        >
           <Badge badgeContent={2} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <IconButton 
-          color="inherit" 
-          style={{width: '45px', height: '45px', background:'#21213E', position: 'sticky'}}
-          onClick={handleMoreIconClick}
-        >
-          <MoreVertIcon />
-        </IconButton>
+
+        <Fragment>
+          <Box
+            sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
+          >
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleClick}
+                color="inherit"
+                className={classes.iconButton}
+                aria-controls={open ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+              >
+                <MoreVertIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+          <Menu
+            anchorEl={anchorEl}
+            id="account-menu"
+            open={open}
+            onClose={handleClose}
+            onClick={handleClose}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                overflow: "visible",
+                filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                mt: 1.5,
+                "& .MuiAvatar-root": {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1,
+                },
+                "&:before": {
+                  content: '""',
+                  display: "block",
+                  position: "absolute",
+                  top: 0,
+                  right: 14,
+                  width: 10,
+                  height: 10,
+                  bgcolor: "background.paper",
+                  transform: "translateY(-50%) rotate(45deg)",
+                  zIndex: 0,
+                },
+              },
+            }}
+            transformOrigin={{ horizontal: "right", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          >
+            <MenuItem onClick={handleMoreIconClick}>
+              <Avatar /> Profile
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Avatar /> My account
+            </MenuItem>
+            <Divider />
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <PersonAddIcon fontSize="small" />
+              </ListItemIcon>
+              Add another account
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <SettingsIcon fontSize="small" />
+              </ListItemIcon>
+              Settings
+            </MenuItem>
+            <MenuItem onClick={handleLogOut}>
+              <ListItemIcon>
+                <LogoutIcon fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </Menu>
+        </Fragment>
       </div>
     </div>
   );

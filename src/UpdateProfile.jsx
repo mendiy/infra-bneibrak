@@ -9,6 +9,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   FormControl,
   InputLabel,
   MenuItem,
@@ -37,6 +42,14 @@ const UpdateProfile = () => {
   const [errors, setErrors] = useState("");
   const [success, setSuccess] = useState("");
 
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -60,6 +73,21 @@ const UpdateProfile = () => {
     };
     fetchUserData();
   }, []); // Empty dependency array ensures this effect runs only once after initial render
+
+  const handleSoftDelete = async () => {
+    try {
+      // Send a delete request to soft delete the user profile
+      await axios.put("http://localhost:5000/api/users/deleteProfile");
+      // Set isDeleted to true to prevent further data fetching
+      localStorage.removeItem("authToken");
+      navigateTo("/");
+      // Optional: You may want to redirect or show a confirmation message
+      console.log("User profile soft deleted");
+    } catch (error) {
+      console.error("Error soft deleting user profile:", error);
+      // Handle the error appropriately, e.g., display an error message
+    }
+  };
 
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -100,11 +128,17 @@ const UpdateProfile = () => {
         "http://localhost:5000/api/users/profileUpdate",
         data
       );
-      setSuccess(response.data.message)
+      setSuccess(responsePut.data.message);
       console.log(responsePut);
 
-      // Redirect to the home page after the update
-      navigateTo("/homepage");
+      // Navigate based on changes
+      if (isPasswordModified || email !== "") {
+        // Redirect to the sign-in page if email or password has changed
+        navigateTo("/");
+      } else {
+        // Otherwise, continue to the home page
+        navigateTo("/homepage");
+      }
     } catch (error) {
       console.error("Error updating user profile:", error);
       console.log("Server response data:", error.response.data);
@@ -289,6 +323,36 @@ const UpdateProfile = () => {
           </Button>
         </Box>
       </Box>
+      <Button
+        type="button"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2, backgroundColor: "#ff0f0f" }} // Red background for delete button
+        onClick={handleClickOpen}
+        /* onClick={handleSoftDelete} */
+      >
+        Delete Me
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete your profile? This action cannot be
+            undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleSoftDelete}>Yes</Button>
+          <Button onClick={handleClose} autoFocus>
+            No
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
