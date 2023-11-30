@@ -10,8 +10,8 @@ import UserTitle from './UserTitle';
 import CircularColor from './CircularProgress';
 import checkToken from './verifyToken';
 // import RemoteApp from 'project_app/App'
-// const RemoteApp = React.lazy(() => import('project_app/App'));
-import Sidebar from './Sidebar';
+import UpdateProfile from './UpdateProfile';
+import CurrentProfile from './CurrentProfile';
 
 const theme = createTheme({
   palette: {
@@ -19,6 +19,15 @@ const theme = createTheme({
       main: '#F6C927',
     },
     background: { default: '#0A0A1B' },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1080,
+      xl: 1920,
+    },
   },
 });
 
@@ -73,21 +82,21 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
     {/* <Sidebar /> */}
-      {/* <RouterProvider router={router}> */}
-        <Routes>
-          {!isLoaded ? (
-            <Route path="/*" element={<CircularColor />} />
-          ) : (
-            <>
-              <Route path="/userTitle" element={<UserTitle />} />
-              <Route path="/homepage" element={<Homepage />} />
-              <Route path="/" element={<SignIn />} />
-              <Route path="/register" element={<SignUp />} />
-              <Route path="/projects" element={<RemoteApp />} />
-            </>
-          )}
-        </Routes>
-      {/* </RouterProvider> */}
+      <Routes>
+        {!isLoaded ? (
+          <Route path="/*" element={<CircularColor />} />
+        ) : (
+          <>
+            <Route path="/userTitle" element={<UserTitle />} />
+            <Route path="/homepage" element={<Homepage />} />
+            <Route path="/" element={<SignIn />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route path='/currentProfile' element={<CurrentProfile />} />
+            <Route path='/updateProfile' element={<UpdateProfile />} />
+            {/* <Route path="/projects" element={<RemoteApp />} /> */}
+          </>
+        )}
+      </Routes>
     </ThemeProvider>
   );
 };
