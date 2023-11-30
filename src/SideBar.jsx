@@ -10,13 +10,16 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import DvrOutlinedIcon from '@mui/icons-material/DvrOutlined';
 import LogOutButton from "./LogOutButton";
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
+  const navigateTo = useNavigate()
   const [selectedButton, setSelectedButton] = useState(null);
   
 
-  const handleButtonClick = (button) => {
+  const handleButtonClick = (button, navigate) => {
     setSelectedButton(button);
+    navigateTo(navigate)
   };
   return (
     <Drawer 
@@ -52,13 +55,13 @@ const Sidebar = () => {
          svg={
           <FeedOutlinedIcon sx={{color: 'white', width: '20px', height: '18px'}}></FeedOutlinedIcon>
           }
-          onClick={() => handleButtonClick(2)}
+          onClick={() => handleButtonClick(2, '/projects')}
           />
           <ListItemSpaciel
           text='Board'
           bgcolor={selectedButton === 3 ? '#F6C927' : '#121231'}
           svg={<DvrOutlinedIcon sx={{color: 'white', width: '20px', height: '18px'}} />}
-        onClick={() => handleButtonClick(3)}
+        onClick={() => handleButtonClick(3, '/todo-board')}
            />
       <ListItemSpaciel 
       text="Add User"
