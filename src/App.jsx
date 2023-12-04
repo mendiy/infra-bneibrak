@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import them from './them';
 import SignIn from './pages/login';
 import SignUp from './pages/register';
-import Deshboard from './pages/Deshboard';
+import Deshboard from './pages/Dashboard';
 import UserTitle from './pages/UserTitle';
 import CircularColor from './components/CircularProgress';
 import checkToken from './verifyToken';
@@ -25,7 +25,7 @@ const App = () => {
     setReload(prev => prev+1); 
     const fetchData = async () => {
       const response = await checkToken();
-      if (response === 200 && (window.location.pathname === '/' || window.location.pathname === '/register')) navigateTo('/deshboard');
+      if (response === 200 && (window.location.pathname === '/' || window.location.pathname === '/register')) navigateTo('/dashboard');
       setIsLoaded(true);
     };
 
@@ -74,7 +74,7 @@ const App = () => {
         ) : (
           <>
             <Route path="/userTitle" element={<UserTitle />} />
-            <Route path="/deshboard" element={<Deshboard />} />
+            <Route path="/dashboard" element={<Deshboard />} />
             <Route path="/" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path='/currentProfile' element={<CurrentProfile key={reload}/>} />

@@ -53,7 +53,7 @@ const Sidebar = () => {
                 sx={{ color: "white", width: "20px", height: "18px" }}
               ></SpeedOutlinedIcon>
             }
-            onClick={() => handleButtonClick(1 , '/deshboard')}
+            onClick={() => handleButtonClick(1 , '/dashboard')}
           />
           <ListItemSpaciel
 
