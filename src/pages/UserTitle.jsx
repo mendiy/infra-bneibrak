@@ -30,14 +30,14 @@ const allowedTitles = [
   "Other",
 ];
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#F6C927",
-    },
-    background: { default: "#0A0A1B" },
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: "#F6C927",
+//     },
+//     background: { default: "#0A0A1B" },
+//   },
+// });
 
 export default function UserClassification() {
   const [personTitle, setPersonTitle] = useState("");
@@ -69,7 +69,7 @@ export default function UserClassification() {
    
       setSuccess(response.data.message);
       setTimeout(() => {
-        navigate('/homepage');;
+        navigate('/dashboard');;
       }, 1000);
       
     } catch (error) {

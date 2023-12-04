@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import {
   Drawer,
-  Icon,
   List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+
 import ListItemSpaciel from "./ListItemSpecial";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import SpeedOutlinedIcon from "@mui/icons-material/SpeedOutlined";
@@ -16,13 +12,15 @@ import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import DvrOutlinedIcon from "@mui/icons-material/DvrOutlined";
-import LogOutButton from "./LogOutButton";
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
+  const navigateTo = useNavigate()
   const [selectedButton, setSelectedButton] = useState(null);
 
-  const handleButtonClick = (button) => {
+  const handleButtonClick = (button, navigate) => {
     setSelectedButton(button);
+    navigateTo(navigate)
   };
   return (
     <Drawer
@@ -38,12 +36,13 @@ const Sidebar = () => {
           backgroundColor: "#121231",
           color: "white",
           flexGrow: "inherit",
+          
+          
         },
       }}
     >
-      <div style={{ flex: 1 }}>
-        {/* First flex container with five buttons */}
-        {/* <LogOutButton /> */}
+
+      <div style={{ flex: 1}}>
         <List>
           <div style={{ height: "8vh" }}> </div>
           <ListItemSpaciel
@@ -54,9 +53,10 @@ const Sidebar = () => {
                 sx={{ color: "white", width: "20px", height: "18px" }}
               ></SpeedOutlinedIcon>
             }
-            onClick={() => handleButtonClick(1)}
+            onClick={() => handleButtonClick(1 , '/dashboard')}
           />
           <ListItemSpaciel
+
             text="Projects"
             bgcolor={selectedButton === 2 ? "#F6C927" : "#121231"}
             svg={
@@ -64,10 +64,11 @@ const Sidebar = () => {
                 sx={{ color: "white", width: "20px", height: "18px" }}
               ></FeedOutlinedIcon>
             }
-            onClick={() => handleButtonClick(2)}
+            
+            onClick={() => handleButtonClick(2, '/projects')}   
           />
           <ListItemSpaciel
-            text="Board"
+            text="Specs"
             bgcolor={selectedButton === 3 ? "#F6C927" : "#121231"}
             svg={
               <DvrOutlinedIcon

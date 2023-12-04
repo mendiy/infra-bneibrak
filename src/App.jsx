@@ -1,47 +1,33 @@
-// App.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import SignIn from './login';
-import SignUp from './register';
-import Homepage from './HomePage';
-import UserTitle from './UserTitle';
-import CircularColor from './CircularProgress';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import them from './them';
+import SignIn from './pages/login';
+import SignUp from './pages/register';
+import Dashboard from './pages/Dashboard';
+import UserTitle from './pages/UserTitle';
+import CircularColor from './components/CircularProgress';
 import checkToken from './verifyToken';
-import UpdateProfile from './UpdateProfile';
-import CurrentProfile from './CurrentProfile';
+import UpdateProfile from './pages/UpdateProfile';
+import CurrentProfile from './components/CurrentProfile';
+import {useLocation} from 'react-router-dom';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#F6C927',
-    },
-    background: { default: '#0A0A1B' },
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1080,
-      xl: 1920,
-    },
-  },
-});
+
 
 const App = () => {
   const navigateTo = useNavigate();
+  const location = useLocation();
+  const [reload, setReload] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    setReload(prev => prev+1); 
     const fetchData = async () => {
-      
-        const response = await checkToken();
-        if(response == 200  && (window.location.pathname == '/' || window.location.pathname == '/register' )) navigateTo('/homepage')
-        setIsLoaded(true);
-      };
-
+      const response = await checkToken();
+      if (response === 200 && (window.location.pathname === '/' || window.location.pathname === '/register')) navigateTo('/dashboard');
+      setIsLoaded(true);
+    };
 
     const axiosInterceptorRequest = axios.interceptors.request.use(
       (config) => {
@@ -58,7 +44,6 @@ const App = () => {
 
     const axiosInterceptorResponse = axios.interceptors.response.use(
       (response) => {
-      
         return response;
       },
       (error) => {
@@ -66,42 +51,38 @@ const App = () => {
           setTimeout(() => {
             console.log('You are not authorized');
             navigateTo('/');
-           
           }, 1000);
         }
         return Promise.reject(error);
       }
-     
     );
-   
-    // setIsLoaded(true);
+
     fetchData();
-    
-    
-    
 
     return () => {
       axios.interceptors.request.eject(axiosInterceptorRequest);
       axios.interceptors.response.eject(axiosInterceptorResponse);
     };
-  }, [navigateTo]);
+  }, [navigateTo, location]);
+
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={them}>
       <Routes>
         {!isLoaded ? (
           <Route path="/*" element={<CircularColor />} />
         ) : (
           <>
             <Route path="/userTitle" element={<UserTitle />} />
-            <Route path="/homepage" element={<Homepage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
-            <Route path='/currentProfile' element={<CurrentProfile />} />
+            <Route path='/currentProfile' element={<CurrentProfile key={reload}/>} />
             <Route path='/updateProfile' element={<UpdateProfile />} />
+            <Route path="/projects/*" element={<Dashboard /> } />
           </>
         )}
-      </Routes>
+      </Routes>  
     </ThemeProvider>
   );
 };

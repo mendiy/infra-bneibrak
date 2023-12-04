@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from '@mui/styles';
 import { Box, createTheme } from "@mui/system";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import SettingsIcon from "@mui/icons-material/Settings";
