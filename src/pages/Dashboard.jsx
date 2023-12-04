@@ -3,10 +3,10 @@ import Sidebar from "../components/SideBar";
 import SearchBar from "../components/SearchBar";
 import UserMenu from "../components/UserMenu";
 import Grid from "@mui/material/Grid";
-// import RemoteApp from 'project_app/App'
+// import ProjectsApp from 'project_app/App'
 import {useLocation} from 'react-router-dom';
 
-export default function Deshboard() {
+export default function Dashboard() {
 
   const location = useLocation();
   const [reload, setReload] = useState(0);
@@ -49,7 +49,7 @@ export default function Deshboard() {
             {/* You can further divide this row into columns as needed */}
             <Grid item xs={3}></Grid> 
             <Grid item xs={9} style={{ marginLeft: "-5%"  }}>
-              {/* <RemoteApp key={reload} /> */}
+              {/* <ProjectsApp key={reload} /> */}
             </Grid>
             <Grid item xs={2}></Grid> {/* Adjust the column size as needed */}
           </Grid>

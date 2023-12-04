@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import them from './them';
 import SignIn from './pages/login';
 import SignUp from './pages/register';
-import Deshboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard';
 import UserTitle from './pages/UserTitle';
 import CircularColor from './components/CircularProgress';
 import checkToken from './verifyToken';
@@ -74,12 +74,12 @@ const App = () => {
         ) : (
           <>
             <Route path="/userTitle" element={<UserTitle />} />
-            <Route path="/dashboard" element={<Deshboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path='/currentProfile' element={<CurrentProfile key={reload}/>} />
             <Route path='/updateProfile' element={<UpdateProfile />} />
-            <Route path="/projects/*" element={<Deshboard /> } />
+            <Route path="/projects/*" element={<Dashboard /> } />
           </>
         )}
       </Routes>  
