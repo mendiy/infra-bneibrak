@@ -20,6 +20,8 @@ import {
   OutlinedInput,
   Select,
 } from "@mui/material";
+import {useLocation} from 'react-router-dom';
+
 
 const UpdateProfile = () => {
   const navigateTo = useNavigate();
@@ -31,7 +33,11 @@ const UpdateProfile = () => {
     "Other",
   ];
 
+  const location = useLocation();
+  
+
   // State variables for form fields
+  const [reload, setReload] = useState(0);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -51,6 +57,7 @@ const UpdateProfile = () => {
   };
 
   useEffect(() => {
+   
     const fetchUserData = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/users/me");
@@ -72,7 +79,7 @@ const UpdateProfile = () => {
       }
     };
     fetchUserData();
-  }, []); // Empty dependency array ensures this effect runs only once after initial render
+  }, []); 
 
   const handleSoftDelete = async () => {
     try {
@@ -137,7 +144,7 @@ const UpdateProfile = () => {
         navigateTo("/");
       } else {
         // Otherwise, continue to the home page
-        navigateTo("/homepage");
+        navigateTo("/dashboard");
       }
     } catch (error) {
       console.error("Error updating user profile:", error);

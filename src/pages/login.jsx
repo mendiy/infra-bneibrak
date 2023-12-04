@@ -57,7 +57,7 @@ export default function SignIn() {
       setSuccess(response.data.message);
       const title = response.data.title;
       if (title) {
-        navigateTo("/homepage");
+        navigateTo("/deshboard");
       } else {
         navigateTo(`/userTitle`);
       }

@@ -69,7 +69,7 @@ export default function UserClassification() {
    
       setSuccess(response.data.message);
       setTimeout(() => {
-        navigate('/homepage');;
+        navigate('/deshboard');;
       }, 1000);
       
     } catch (error) {
