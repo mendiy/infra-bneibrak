@@ -51,6 +51,7 @@ export default function SignIn() {
         `http://localhost:5000/api/users/login`,
         data
       );
+      
       const receivedToken = response.data.token;
       localStorage.setItem("authToken", receivedToken);
       setErrors("");

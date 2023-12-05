@@ -1,60 +1,105 @@
-import React ,{useState, useEffect} from "react";
-import Sidebar from "../components/SideBar";
-import SearchBar from "../components/SearchBar";
-import UserMenu from "../components/UserMenu";
-import Grid from "@mui/material/Grid";
-// import ProjectsApp from 'project_app/App'
-import {useLocation} from 'react-router-dom';
 
-export default function Dashboard() {
+import { Box, Container, Grid } from '@mui/material';
+import { AddProject } from '../components/dashboard/AddProject.jsx';
+import { Sales } from '../components/dashboard/sales.jsx';
+import { Ongoing } from '../components/dashboard/Ongoing.jsx';
+import { TotalProjects } from '../components/dashboard/TotalProjects.jsx';
+import { AddIssue } from '../components/dashboard/AddIssue.jsx';
+import { LatestOrders } from '../components/dashboard/latest.jsx'
+import { ChartGraph} from '../components/dashboard/chart.jsx'
 
-  const location = useLocation();
-  const [reload, setReload] = useState(0);
-  const [firstReload, setFirstReload] = useState(0);
-  useEffect(() => {
-    setReload(prev => prev+1); 
-    if(firstReload == 0) setFirstReload(1)
-  }, [location]);
-
-  return (
-    <div>
-      <Grid container style={{ height: "100vh" }}>
-        {/* First Row */}
-        <Grid item xs={12}>
-          <Grid container style={{ height: "6%", margin: 0, padding: 0  }}>
-            {/* Left Column */}
-            <Grid item xs={2.5}>
-              <Sidebar />
-            </Grid>
-
-            {/* Second Left Column (remaining space, disappears on smaller screens) */}
-            <Grid item xs></Grid>
-
-            {/* Second Right Column */}
-            <Grid item xs={3}>
-              <SearchBar />
-            </Grid>
-
-            {/* Right Column */}
-            <Grid item xs={3.5}>
-              <UserMenu  key={firstReload}/>
-            </Grid>
+export const Dashboard = () => ( 
+  <>
+    <Box
+      component="main"
+      
+      sx={{
+        flexGrow: 1,
+        py: 8,
+        background: '#0A0A1B',
+        
+      }}
+    >
+      <Container maxWidth={false}>
+        <Grid
+          container
+          spacing={3}
+        >
+        <Grid
+            item
+            lg={3}
+            sm={6}
+            xl={3}
+            xs={12}
+          >
+            <AddProject />
+          </Grid>    
+          <Grid
+            item
+            lg={3}
+            sm={6}
+            xl={3}
+            xs={12}
+          >
+            <AddIssue />
+          </Grid>
+          <Grid
+            item
+            lg={3}
+            sm={6}
+            xl={3}
+            xs={12}
+          >
+            <TotalProjects />
+          </Grid>
+          <Grid
+            item
+            lg={3}
+            sm={6}
+            xl={3}
+            xs={12}
+          >
+            <Ongoing />
+          </Grid>
+         
+          <Grid
+            item
+            lg={8}
+            md={12}
+            xl={9}
+            xs={12}
+          >
+            <LatestOrders />
+          </Grid>
+          <Grid
+            item
+            xl={3}
+            lg={4}
+            sm={6}
+            xs={12}
+          >
+            <TotalProjects  />
+          </Grid>
+          <Grid
+            item
+            lg={4}
+            md={6}
+            xl={3}
+            xs={12}
+          >
+            <ChartGraph  />
+          </Grid>
+          <Grid
+            item
+            lg={8}
+            md={12}
+            xl={9}
+            xs={12}
+          >
+            <Sales />
           </Grid>
         </Grid>
-
-        {/* Second Row */}
-        <Grid item xs={12}>
-          <Grid container style={{ height: "90%" }}>
-            {/* Content of the second row goes here */}
-            {/* You can further divide this row into columns as needed */}
-            <Grid item xs={3}></Grid> 
-            <Grid item xs={9} style={{ marginLeft: "-5%"  }}>
-              {/* <ProjectsApp key={reload} /> */}
-            </Grid>
-            <Grid item xs={2}></Grid> {/* Adjust the column size as needed */}
-          </Grid>
-        </Grid>
-      </Grid>
-    </div>
-  );
-}
+      </Container>
+    </Box>
+  </>
+);
