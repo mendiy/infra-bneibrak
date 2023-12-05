@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import them from './them';
+import theme from './theme';
 import SignIn from './pages/login';
 import SignUp from './pages/register';
-import Dashboard from './pages/Dashboard';
+import Layout from './pages/Layout';
 import UserTitle from './pages/UserTitle';
 import CircularColor from './components/CircularProgress';
 import checkToken from './verifyToken';
@@ -67,19 +67,19 @@ const App = () => {
 
 
   return (
-    <ThemeProvider theme={them}>
+    <ThemeProvider theme={theme}>
       <Routes>
         {!isLoaded ? (
           <Route path="/*" element={<CircularColor />} />
         ) : (
           <>
             <Route path="/userTitle" element={<UserTitle />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Layout />} />
             <Route path="/" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path='/currentProfile' element={<CurrentProfile key={reload}/>} />
             <Route path='/updateProfile' element={<UpdateProfile />} />
-            <Route path="/projects/*" element={<Dashboard /> } />
+            {/* <Route path="/Projects/*" element={<Layout /> } /> */}
           </>
         )}
       </Routes>  

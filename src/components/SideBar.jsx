@@ -4,6 +4,7 @@ import {
   List,
 } from "@mui/material";
 
+
 import ListItemSpaciel from "./ListItemSpecial";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import SpeedOutlinedIcon from "@mui/icons-material/SpeedOutlined";
@@ -65,7 +66,7 @@ const Sidebar = () => {
               ></FeedOutlinedIcon>
             }
             
-            onClick={() => handleButtonClick(2, '/projects')}   
+            onClick={() => handleButtonClick(2, '/Projects')}   
           />
           <ListItemSpaciel
             text="Specs"
