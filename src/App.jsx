@@ -10,12 +10,17 @@ import UserTitle from './pages/UserTitle';
 import CircularColor from './components/CircularProgress';
 import checkToken from './verifyToken';
 import UpdateProfile from './pages/UpdateProfile';
+import ImageUploader from './pages/ImageUploader';
 import CurrentProfile from './components/CurrentProfile';
 import {useLocation} from 'react-router-dom';
+import cloudinary from 'cloudinary-core';
 
 
+export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
 
 const App = () => {
+  
+  
   const navigateTo = useNavigate();
   const location = useLocation();
   const [reload, setReload] = useState(0);
@@ -73,6 +78,7 @@ const App = () => {
           <Route path="/*" element={<CircularColor />} />
         ) : (
           <>
+            <Route path="/imageLoader" element={<ImageUploader />} />
             <Route path="/userTitle" element={<UserTitle />} />
             <Route path="/dashboard" element={<Layout />} />
             <Route path="/" element={<SignIn />} />
