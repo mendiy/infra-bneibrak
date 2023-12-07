@@ -4,7 +4,7 @@ const checkToken = async () => {
   try{
   const token = localStorage.getItem('authToken')
 
-      const response = await axios.get(`http://localhost:5000/api/users/verifyToken`, {
+      const response = await axios.get(`https://vercel.com/mendiys-projects/mendi-test/GUDsrQx58eY4L7Kkg4aqd8JLF6NH/api/users/verifyToken`, {
         headers: {
           authorization: token,
         },
