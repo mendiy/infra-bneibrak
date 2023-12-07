@@ -17,6 +17,9 @@ import cloudinary from 'cloudinary-core';
 
 
 export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
+const env = loadEnv(mode, process.cwd(), '')
+export const api = env.API_URL || 'http//:localhost:5000'
+
 
 const App = () => {
   

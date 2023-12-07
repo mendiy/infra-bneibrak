@@ -1,10 +1,11 @@
 import axios from "axios";
+import { api } from "./App";
 
 const checkToken = async () => {
   try{
   const token = localStorage.getItem('authToken')
 
-      const response = await axios.get(`https://mendi-test-mendiys-projects.vercel.app/api/users/verifyToken`, {
+      const response = await axios.get(`${api}/api/users/verifyToken`, {
         headers: {
           authorization: token,
         },
