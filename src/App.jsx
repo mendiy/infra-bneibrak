@@ -14,11 +14,12 @@ import ImageUploader from './pages/ImageUploader';
 import CurrentProfile from './components/CurrentProfile';
 import {useLocation} from 'react-router-dom';
 import cloudinary from 'cloudinary-core';
-
+import dotenv from 'dotenv'
+dotenv.config()
 
 export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
-const env = loadEnv(mode, process.cwd(), '')
-export const api = env.API_URL || 'http//:localhost:5000'
+
+export const api = process.env.API_URL || 'http//:localhost:5000'
 
 
 const App = () => {
