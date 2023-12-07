@@ -18,7 +18,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
 
-export const api = process.env.API_URL || 'http//:localhost:5000'
+export const api = process.env.REACT_APP_API_URL || 'http//:localhost:5000'
 
 
 const App = () => {
