@@ -14,11 +14,17 @@ import ImageUploader from './pages/ImageUploader';
 import CurrentProfile from './components/CurrentProfile';
 import {useLocation} from 'react-router-dom';
 import cloudinary from 'cloudinary-core';
-import dotenv from 'dotenv'
-dotenv.config()
-export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
 
-export const api = process.env.REACT_APP_API_URL || 'http//:localhost:5000'
+// import dotenv from 'dotenv'
+// dotenv.config()
+
+// import { loadEnv} from 'vite'
+
+
+
+export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
+// const env = loadEnv(mode, process.cwd(), '')
+export const api = 'https://mendi-test-mendiys-projects.vercel.app'
 
 
 const App = () => {
@@ -27,7 +33,7 @@ const App = () => {
   const navigateTo = useNavigate();
   const location = useLocation();
   const [reload, setReload] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
     setReload(prev => prev+1); 
@@ -65,7 +71,7 @@ const App = () => {
       }
     );
 
-    fetchData();
+    // fetchData();
 
     return () => {
       axios.interceptors.request.eject(axiosInterceptorRequest);
