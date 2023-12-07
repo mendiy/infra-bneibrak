@@ -14,6 +14,7 @@ import ImageUploader from './pages/ImageUploader';
 import CurrentProfile from './components/CurrentProfile';
 import {useLocation} from 'react-router-dom';
 import cloudinary from 'cloudinary-core';
+import { loadEnv} from 'vite'
 
 
 export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
