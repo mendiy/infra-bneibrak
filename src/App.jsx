@@ -28,6 +28,8 @@ export const api = 'https://mendi-test-mendiys-projects.vercel.app'
 
 
 const App = () => {
+
+  console.log('start....')
   
   
   const navigateTo = useNavigate();
