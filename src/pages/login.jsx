@@ -1,5 +1,5 @@
 import react, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink  } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -159,9 +159,9 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/register" variant="body2">
+              <NavLink  to={"/register"} variant="body2">
                 {"Don't have an account? Sign Up"}
-              </Link>
+              </NavLink >
             </Grid>
           </Grid>
           <Typography component="p" variant="p" color="error">
