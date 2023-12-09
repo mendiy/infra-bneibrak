@@ -33,7 +33,7 @@ const App = () => {
   const navigateTo = useNavigate();
   const location = useLocation();
   const [reload, setReload] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setReload(prev => prev+1); 
