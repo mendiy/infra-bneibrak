@@ -38,7 +38,6 @@ const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    console.log('start1....')
     setReload(prev => prev+1); 
     const fetchData = async () => {
       const response = await checkToken();
@@ -46,7 +45,6 @@ const App = () => {
       setIsLoaded(true);
     };
 
-    console.log('start2....')
     const axiosInterceptorRequest = axios.interceptors.request.use(
       (config) => {
         const token = localStorage.getItem('authToken');
@@ -76,7 +74,6 @@ const App = () => {
     );
 
     fetchData();
-    console.log('start3....')
 
     return () => {
       axios.interceptors.request.eject(axiosInterceptorRequest);
