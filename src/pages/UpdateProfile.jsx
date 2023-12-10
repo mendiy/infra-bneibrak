@@ -133,7 +133,7 @@ const UpdateProfile = () => {
 
       // Send a put request to update the user profile
       const responsePut = await axios.put(
-        "http://localhost:5000/api/users/profileUpdate",
+        `${api}/api/users/profileUpdate`,
         data
       );
       setSuccess(responsePut.data.message);

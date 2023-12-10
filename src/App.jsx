@@ -15,6 +15,7 @@ import CurrentProfile from './components/CurrentProfile';
 import {useLocation} from 'react-router-dom';
 import cloudinary from 'cloudinary-core';
 
+
 // import dotenv from 'dotenv'
 // dotenv.config()
 
@@ -24,10 +25,12 @@ import cloudinary from 'cloudinary-core';
 
 export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
 // const env = loadEnv(mode, process.cwd(), '')
-export const api = 'https://mendi-test-mendiys-projects.vercel.app'
+export const api = import.meta.env.VITE_API_URL
+console.log(api)
 
 
 const App = () => {
+  
 
   console.log('start....')
   

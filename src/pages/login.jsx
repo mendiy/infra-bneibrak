@@ -159,9 +159,9 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <NavLink  to={"/register"} variant="body2">
+              <NavLink  to={"/register"} variant="body2" style={{ color: '#F6C927' }}>
                 {"Don't have an account? Sign Up"}
-              </NavLink >
+              </NavLink>
             </Grid>
           </Grid>
           <Typography component="p" variant="p" color="error">
