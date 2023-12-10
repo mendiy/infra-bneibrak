@@ -94,9 +94,9 @@ const App = () => {
           <>
             <Route path="/imageLoader" element={<ImageUploader />} />
             <Route path="/userTitle" element={<UserTitle />} />
-            <Route path="/dashboard" element={<Layout />} />
+            <Route path="*/dashboard" element={<Layout />} />
             <Route path="/" element={<SignIn />} />
-            <Route path="/register" element={<SignUp />} />
+            <Route path="*/register" element={<SignUp />} />
             <Route path='/currentProfile' element={<CurrentProfile key={reload}/>} />
             <Route path='/updateProfile' element={<UpdateProfile />} />
             {/* <Route path="/Projects/*" element={<Layout /> } /> */}
