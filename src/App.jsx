@@ -15,14 +15,6 @@ import CurrentProfile from './components/CurrentProfile';
 import {useLocation} from 'react-router-dom';
 import cloudinary from 'cloudinary-core';
 
-
-// import dotenv from 'dotenv'
-// dotenv.config()
-
-// import { loadEnv} from 'vite'
-
-
-
 export const cl = new cloudinary.Cloudinary({ cloud_name: 'megobb' });
 // const env = loadEnv(mode, process.cwd(), '')
 export const api = import.meta.env.VITE_API_URL
@@ -94,7 +86,7 @@ const App = () => {
           <>
             <Route path="/imageLoader" element={<ImageUploader />} />
             <Route path="/userTitle" element={<UserTitle />} />
-            <Route path="**/dashboard" element={<Layout />} />
+            <Route path="/dashboard" element={<Layout />} />
             <Route path="/" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path='/currentProfile' element={<CurrentProfile key={reload}/>} />
