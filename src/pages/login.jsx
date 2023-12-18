@@ -55,6 +55,7 @@ export default function SignIn() {
       
       const receivedToken = response.data.token;
       localStorage.setItem("authToken", receivedToken);
+      
       setErrors("");
       setSuccess(response.data.message);
       const title = response.data.title;
